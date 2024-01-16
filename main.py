@@ -18,6 +18,7 @@ RED = (255, 0, 0)
 bird_rect = pygame.Rect(50, HEIGHT // 2, 30, 30)
 bird_velocity = 0
 pipes = []
+score = 0
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Flappy Bird")
@@ -32,7 +33,7 @@ def game_over():
     screen.fill((0,0,0))
     font = pygame.font.SysFont("consolas", 40)
     font_restart = pygame.font.SysFont("consolas", 25)
-    game_over_text = font.render("Game Over", True, WHITE)
+    game_over_text = font.render("GAME OVER", True, RED)
     screen.blit(game_over_text, (WIDTH // 2 - 100, HEIGHT // 2 - 50))
     restart_game_text = font_restart.render("Press Enter to Restart", True, WHITE)
     screen.blit(restart_game_text, (WIDTH // 2 - 150, HEIGHT // 2 + 50))
@@ -49,14 +50,20 @@ def game_over():
 
 # Restart Game
 def restart_game():
-    global bird_velocity, bird_rect, pipes
+    global bird_velocity, bird_rect, pipes, score
     bird_rect = pygame.Rect(50, HEIGHT // 2, 30, 30)
     bird_velocity = 0   
     pipes = []
+    score = 0
+
+def draw_score():
+    font = pygame.font.Font(None, 36)
+    text = font.render(f"Score: {score}", True, WHITE)
+    screen.blit(text, (10, 10)) 
 
 # Run Game
 def run_game():
-    global bird_velocity, bird_rect, pipes
+    global bird_velocity, bird_rect, pipes, score
 
     for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -93,6 +100,11 @@ def run_game():
     # Draw pipes
     for pipe in pipes:
         draw_pipe(pipe[0], pipe[1])
+
+    for pipe in pipes:
+        if pipe[0] == bird_rect.x:
+            score += 1 
+    draw_score()
 
     pygame.draw.rect(screen, WHITE, bird_rect)
     pygame.display.flip()
