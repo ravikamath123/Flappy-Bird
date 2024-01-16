@@ -14,4 +14,5 @@ pip install pygame
 Press `SPACE` to control the movement of the bird in the game.
 
 ## TODO
-- [ ] Define a `restart_game()` function used to restart the game when `ENTER` is pressed. 
+- [x] Define a `restart_game()` function used to restart the game when `ENTER` is pressed. 
+- [ ] Need to add a `score` panel to track the score
