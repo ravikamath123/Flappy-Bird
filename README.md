@@ -15,4 +15,4 @@ Press `SPACE` to control the movement of the bird in the game.
 
 ## TODO
 - [x] Define a `restart_game()` function used to restart the game when `ENTER` is pressed. 
-- [ ] Need to add a `score` panel to track the score
+- [x] Need to add a `score` panel to track the score
