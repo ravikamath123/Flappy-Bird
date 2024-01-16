@@ -31,12 +31,28 @@ def draw_pipe(x, height):
 def game_over():
     screen.fill((0,0,0))
     font = pygame.font.SysFont("consolas", 40)
+    font_restart = pygame.font.SysFont("consolas", 25)
     game_over_text = font.render("Game Over", True, WHITE)
     screen.blit(game_over_text, (WIDTH // 2 - 100, HEIGHT // 2 - 50))
+    restart_game_text = font_restart.render("Press Enter to Restart", True, WHITE)
+    screen.blit(restart_game_text, (WIDTH // 2 - 150, HEIGHT // 2 + 50))
     pygame.display.flip()
-    pygame.time.wait(5000)
-    pygame.quit()
-    sys.exit()
+    pygame.time.wait(1000)
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        elif event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
+            restart_game()
+            return
+
+# Restart Game
+def restart_game():
+    global bird_velocity, bird_rect, pipes
+    bird_rect = pygame.Rect(50, HEIGHT // 2, 30, 30)
+    bird_velocity = 0   
+    pipes = []
 
 # Run Game
 def run_game():
